@@ -7,8 +7,8 @@ namespace Customers_Management.Services.CustomerService
 {
     public interface ICustomerService
     {
-        Task<ApiResponse<IEnumerable<Customer>>> GetAllCustomers();
+        Task<ApiResponse<IEnumerable<GetCustomerDto>>> GetAllCustomers();
 
-        Task<ApiResponse<Customer>> GetCustomerById();
+        Task<ApiResponse<GetCustomerDto>> GetCustomerById(int id);
     }
 }

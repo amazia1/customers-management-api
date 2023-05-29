@@ -8,19 +8,51 @@ namespace Customers_Management.Services.CustomerService
   public class CustomerService : ICustomerService
   {
     private readonly IMapper _mapper;
-    public CustomerService(IMapper mapper)
+    private readonly DataContext _context;
+    public CustomerService(IMapper mapper, DataContext context)
     {
-      this._mapper = mapper;
+        this._mapper = mapper;
+        this._context = context;
     }
 
-    public Task<ApiResponse<IEnumerable<Customer>>> GetAllCustomers()
+    public async Task<ApiResponse<IEnumerable<GetCustomerDto>>> GetAllCustomers()
     {
-      throw new NotImplementedException();
+        var response = new ApiResponse<IEnumerable<GetCustomerDto>>();
+
+        try
+        {
+            var customers = await _context.Customers.ToListAsync();
+            response.Data = customers.Select(c => _mapper.Map<GetCustomerDto>(c));
+        }
+        catch (Exception ex)
+        {
+            response.Success = false;
+            response.Message = ex.Message;
+        }
+
+        return response;
     }
 
-    public Task<ApiResponse<Customer>> GetCustomerById()
+    public async Task<ApiResponse<GetCustomerDto>> GetCustomerById(int id)
     {
-      throw new NotImplementedException();
+        var response = new ApiResponse<GetCustomerDto>();
+
+        try
+        {
+            var customer = await _context.Customers.FirstOrDefaultAsync(c => c.Id == id);
+
+            if (customer is null)
+                throw new Exception($"Customer {id} not found");
+
+            response.Data = _mapper.Map<GetCustomerDto>(customer);
+        }
+        catch (Exception ex)
+        {
+           response.Success = false;
+           response.Message = ex.Message;
+        }
+
+        return response;
     }
   }
 }

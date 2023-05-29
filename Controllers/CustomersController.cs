@@ -11,7 +11,7 @@ namespace Customers_Management.Controllers
     public class CustomersController : ControllerBase
     {
         private readonly ICustomerService _customerService;
-        
+
         public CustomersController(ICustomerService customerService)
         {
             this._customerService = customerService;
@@ -20,13 +20,13 @@ namespace Customers_Management.Controllers
         [HttpGet("GetAll")]
         public async Task<ActionResult<ApiResponse<IEnumerable<GetCustomerDto>>>> Get()
         {
-            return null;
+            return Ok(await this._customerService.GetAllCustomers());
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ApiResponse<IEnumerable<GetCustomerDto>>>> GetSingle(int id)
+        public async Task<ActionResult<ApiResponse<GetCustomerDto>>> GetSingle(int id)
         {
-            return null;
+            return Ok(await this._customerService.GetCustomerById(id));
         }
     }
 }
