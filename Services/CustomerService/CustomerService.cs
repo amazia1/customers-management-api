@@ -8,11 +8,11 @@ namespace Customers_Management.Services.CustomerService
   public class CustomerService : ICustomerService
   {
     private readonly IMapper _mapper;
-    private readonly DataContext _context;
-    public CustomerService(IMapper mapper, DataContext context)
+    private readonly ICustomerRepository _repository;
+    public CustomerService(IMapper mapper, ICustomerRepository repository)
     {
         this._mapper = mapper;
-        this._context = context;
+        this._repository = repository;
     }
 
     public async Task<ApiResponse<IEnumerable<GetCustomerDto>>> GetAllCustomers()
@@ -21,7 +21,7 @@ namespace Customers_Management.Services.CustomerService
 
         try
         {
-            var customers = await _context.Customers.ToListAsync();
+            var customers = await _repository.GetAll();
             response.Data = customers.Select(c => _mapper.Map<GetCustomerDto>(c));
         }
         catch (Exception ex)
@@ -39,7 +39,7 @@ namespace Customers_Management.Services.CustomerService
 
         try
         {
-            var customer = await _context.Customers.FirstOrDefaultAsync(c => c.Id == id);
+            var customer = await _repository.GetById(id);
 
             if (customer is null)
                 throw new Exception($"Customer {id} not found");
