@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-namespace Customers_Management.Services.CustomerService
+namespace Customers_Management.Services.Customer
 {
     public interface ICustomerService
     {

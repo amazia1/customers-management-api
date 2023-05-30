@@ -1,7 +1,7 @@
 global using Customers_Management.Models;
 global using Customers_Management.Dtos;
 global using Customers_Management.Dtos.Customer;
-global using Customers_Management.Services.CustomerService;
+global using Customers_Management.Services.Customer;
 global using Customers_Management.Repositories.Customers;
 global using Microsoft.EntityFrameworkCore;
 global using Customers_Management.Data;

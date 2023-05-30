@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Customers_Management.Services.CustomerService
+namespace Customers_Management.Services.Customer
 {
   public class CustomerService : ICustomerService
   {
     private readonly IMapper _mapper;
     private readonly ICustomerRepository _repository;
+    
     public CustomerService(IMapper mapper, ICustomerRepository repository)
     {
         this._mapper = mapper;
