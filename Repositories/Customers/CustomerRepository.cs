@@ -13,15 +13,19 @@ namespace Customers_Management.Repositories.Customers
       {
           this._context = context;
       }
-      
+
       public async Task<IEnumerable<Customer>> GetAll()
       {
-          return await _context.Customers.ToListAsync();
+          return await _context.Customers
+          .Include(c => c.Contracts)
+          .ToListAsync();
       }
 
       public async Task<Customer> GetById(int id)
       {
-          var customer = await _context.Customers.FirstOrDefaultAsync(c => c.Id == id);
+          var customer = await _context.Customers
+            .Include(c => c.Contracts)
+            .FirstOrDefaultAsync(c => c.Id == id);
           return customer!;
       }
   }
