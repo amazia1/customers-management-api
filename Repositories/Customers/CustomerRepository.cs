@@ -24,8 +24,10 @@ namespace Customers_Management.Repositories.Customers
       public async Task<Customer> GetById(int id)
       {
           var customer = await _context.Customers
-            .Include(c => c.Contracts)
+            .Include(c => c.Contracts)!
+            .ThenInclude(p => p.Packages)!
             .FirstOrDefaultAsync(c => c.Id == id);
+            
           return customer!;
       }
 

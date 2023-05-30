@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Customers_Management.Models
@@ -17,6 +18,7 @@ namespace Customers_Management.Models
 
         public int Usage { get; set; }
 
+        [JsonIgnore]
         public List<Contract>? Contracts { get; set; }
     }
 }
