@@ -54,5 +54,34 @@ namespace Customers_Management.Services.CustomerService
 
         return response;
     }
+
+    public async Task<ApiResponse<GetCustomerDto>> UpdateCustomer(UpdateCustomerDto updatedCustomer)
+    {
+        var response = new ApiResponse<GetCustomerDto>();
+
+        try
+        {
+            var customer = await _repository.GetById(updatedCustomer.Id);
+
+            if (customer is null)
+                throw new Exception($"Customer {updatedCustomer.Id} not found");
+
+            customer.City = updatedCustomer.City;
+            customer.Street = updatedCustomer.Street;
+            customer.HouseNumber = updatedCustomer.HouseNumber;
+            customer.ZipCode = updatedCustomer.ZipCode;
+            
+            await _repository.SaveChanges();
+
+            response.Data = _mapper.Map<GetCustomerDto>(customer);
+        }
+        catch (Exception ex)
+        {
+            response.Success = false;
+            response.Message = ex.Message;
+        }
+        
+        return response;
+    }
   }
 }

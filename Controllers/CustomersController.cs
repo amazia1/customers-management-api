@@ -28,5 +28,16 @@ namespace Customers_Management.Controllers
         {
             return Ok(await this._customerService.GetCustomerById(id));
         }
+
+        [HttpPut]
+        public async Task<ActionResult<ApiResponse<GetCustomerDto>>> UpdateCustomer(UpdateCustomerDto updatedCustomer)
+        {
+            var response = await _customerService.UpdateCustomer(updatedCustomer);
+
+            if (response.Data is null)
+                return NotFound(response);
+
+            return Ok(response);
+        }
     }
 }

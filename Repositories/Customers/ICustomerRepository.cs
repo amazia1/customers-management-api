@@ -10,5 +10,7 @@ namespace Customers_Management.Repositories.Customers
         Task<IEnumerable<Customer>> GetAll();
 
         Task<Customer> GetById(int id);
+
+        Task SaveChanges();
     }
 }

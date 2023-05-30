@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
 namespace Customers_Management.Services.CustomerService
 {
     public interface ICustomerService
@@ -10,5 +9,7 @@ namespace Customers_Management.Services.CustomerService
         Task<ApiResponse<IEnumerable<GetCustomerDto>>> GetAllCustomers();
 
         Task<ApiResponse<GetCustomerDto>> GetCustomerById(int id);
+
+        Task<ApiResponse<GetCustomerDto>> UpdateCustomer(UpdateCustomerDto updatedCustomer);
     }
 }

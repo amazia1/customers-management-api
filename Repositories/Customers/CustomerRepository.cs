@@ -28,5 +28,10 @@ namespace Customers_Management.Repositories.Customers
             .FirstOrDefaultAsync(c => c.Id == id);
           return customer!;
       }
+
+      public async Task SaveChanges()
+      {
+        await _context.SaveChangesAsync();
+      }
   }
 }
