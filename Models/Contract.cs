@@ -15,6 +15,8 @@ namespace Customers_Management.Models
 
         public ContractTypes ContractType { get; set; }
 
+        public Customer? Customer { get; set; }
+
         public List<Package>? Packages { get; set; }
     }
 }

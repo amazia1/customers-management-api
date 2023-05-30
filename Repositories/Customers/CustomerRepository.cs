@@ -13,6 +13,7 @@ namespace Customers_Management.Repositories.Customers
       {
           this._context = context;
       }
+      
       public async Task<IEnumerable<Customer>> GetAll()
       {
           return await _context.Customers.ToListAsync();
@@ -20,7 +21,8 @@ namespace Customers_Management.Repositories.Customers
 
       public async Task<Customer> GetById(int id)
       {
-          return await _context.Customers.FirstOrDefaultAsync(c => c.Id == id);
+          var customer = await _context.Customers.FirstOrDefaultAsync(c => c.Id == id);
+          return customer!;
       }
   }
 }
