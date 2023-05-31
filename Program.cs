@@ -2,6 +2,7 @@ global using Customers_Management.Models;
 global using Customers_Management.Dtos;
 global using Customers_Management.Dtos.Customer;
 global using Customers_Management.Services.Customer;
+global using Customers_Management.Services.Authentication;
 global using Customers_Management.Repositories.Customers;
 global using Microsoft.EntityFrameworkCore;
 global using Customers_Management.Data;
@@ -26,6 +27,7 @@ builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 builder.Services.AddScoped<ICustomerService, CustomerService>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 var app = builder.Build();
 

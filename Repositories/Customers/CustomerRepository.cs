@@ -31,6 +31,14 @@ namespace Customers_Management.Repositories.Customers
           return customer!;
       }
 
+      public async Task<bool> CheckIdExist(string idCard)
+      {
+        var customer = await _context.Customers.FirstOrDefaultAsync(c => c.IdCard.Trim() == idCard.Trim());
+        var isExist = customer is null ? false : true;
+        
+        return isExist;
+      }
+
       public async Task SaveChanges()
       {
         await _context.SaveChangesAsync();
