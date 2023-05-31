@@ -20,12 +20,12 @@ namespace Customers_Management.Services.Authentication
 
         try
         {
-            var isExist = await _repository.CheckIdExist(idCard);
+            var customer = await _repository.GetByIdCard(idCard);
 
-            if (isExist == false)
+            if (customer is null)
                 throw new Exception($"IdCard: {idCard} not found");
 
-            response.Data = isExist;
+            response.Data = true;
         }
         catch (Exception ex)
         {

@@ -11,7 +11,7 @@ namespace Customers_Management.Repositories.Customers
 
         Task<Customer> GetById(int id);
 
-        Task<bool> CheckIdExist(string idCard);
+       Task<Customer> GetByIdCard(string idCard);
 
         Task SaveChanges();
     }

@@ -17,7 +17,8 @@ namespace Customers_Management.Repositories.Customers
       public async Task<IEnumerable<Customer>> GetAll()
       {
           return await _context.Customers
-          .Include(c => c.Contracts)
+          .Include(c => c.Contracts)!
+          .ThenInclude(p => p.Packages)
           .ToListAsync();
       }
 
@@ -31,12 +32,10 @@ namespace Customers_Management.Repositories.Customers
           return customer!;
       }
 
-      public async Task<bool> CheckIdExist(string idCard)
+      public async Task<Customer> GetByIdCard(string idCard)
       {
         var customer = await _context.Customers.FirstOrDefaultAsync(c => c.IdCard.Trim() == idCard.Trim());
-        var isExist = customer is null ? false : true;
-        
-        return isExist;
+        return customer!;
       }
 
       public async Task SaveChanges()
