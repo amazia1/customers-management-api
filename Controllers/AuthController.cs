@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Customers_Management.Controllers
@@ -18,9 +20,16 @@ namespace Customers_Management.Controllers
         }
 
         [HttpGet("{idCard}")]
-        public async Task<ActionResult<ApiResponse<bool>>> Get(string idCard)
+        public async Task<ActionResult<ApiResponse<int>>> Get(string idCard)
         {
-            return Ok(await this._service.IsCustomerExist(idCard));
+            var result = await this._service.IsCustomerExist(idCard);
+            if (result.Success)
+            {
+                var token = this._service.GenerateToken(idCard);
+                Response.Headers.Add("Authorization", $"Bearer {token}");
+            }
+
+            return Ok(result);
         }
     }
 }
