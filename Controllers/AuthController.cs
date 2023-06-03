@@ -20,7 +20,7 @@ namespace Customers_Management.Controllers
         }
 
         [HttpGet("{idCard}")]
-        public async Task<ActionResult<ApiResponse<int>>> Get(string idCard)
+        public async Task<ActionResult<ApiResponse<string>>> Get(string idCard)
         {
             var result = await this._service.IsCustomerExist(idCard);
             if (result.Success)

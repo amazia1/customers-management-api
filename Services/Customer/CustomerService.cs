@@ -56,6 +56,28 @@ namespace Customers_Management.Services.Customer
         return response;
     }
 
+    public async Task<ApiResponse<GetCustomerDto>> GetCustomerByIdCard(string idCard)
+    {
+        var response = new ApiResponse<GetCustomerDto>();
+
+        try
+        {
+            var customer = await _repository.GetFullDetailsByIdCard(idCard);
+
+            if (customer is null)
+                throw new Exception($"Customer ID Card: {idCard} not found");
+
+            response.Data = _mapper.Map<GetCustomerDto>(customer);
+        }
+        catch (Exception ex)
+        {
+           response.Success = false;
+           response.Message = ex.Message;
+        }
+
+        return response;
+    }
+
     public async Task<ApiResponse<GetCustomerDto>> UpdateCustomer(UpdateCustomerDto updatedCustomer)
     {
         var response = new ApiResponse<GetCustomerDto>();

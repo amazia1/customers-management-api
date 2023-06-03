@@ -13,6 +13,8 @@ namespace Customers_Management.Repositories.Customers
 
        Task<Customer> GetByIdCard(string idCard);
 
+       Task<Customer> GetFullDetailsByIdCard(string idCard);
+
         Task SaveChanges();
     }
 }

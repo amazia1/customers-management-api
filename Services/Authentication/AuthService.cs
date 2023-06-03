@@ -20,9 +20,9 @@ namespace Customers_Management.Services.Authentication
         
     }
 
-    public async Task<ApiResponse<int>> IsCustomerExist(string idCard)
+    public async Task<ApiResponse<string>> IsCustomerExist(string idCard)
     {
-        var response = new ApiResponse<int>();
+        var response = new ApiResponse<string>();
 
         try
         {
@@ -31,7 +31,7 @@ namespace Customers_Management.Services.Authentication
             if (customer is null)
                 throw new Exception($"ID: {idCard} not found");
 
-            response.Data = customer.Id;
+            response.Data = createToken(idCard);
         }
         catch (Exception ex)
         {

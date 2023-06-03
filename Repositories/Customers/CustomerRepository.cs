@@ -34,8 +34,19 @@ namespace Customers_Management.Repositories.Customers
 
       public async Task<Customer> GetByIdCard(string idCard)
       {
-        var customer = await _context.Customers.FirstOrDefaultAsync(c => c.IdCard.Trim() == idCard.Trim());
-        return customer!;
+          var customer = await _context.Customers
+            .FirstOrDefaultAsync(c => c.IdCard.Trim() == idCard.Trim());
+          return customer!;
+      }
+
+      public async Task<Customer> GetFullDetailsByIdCard(string idCard)
+      {
+          var customer = await _context.Customers
+            .Include(c => c.Contracts)!
+            .ThenInclude(p => p.Packages)
+            .FirstOrDefaultAsync(c => c.IdCard.Trim() == idCard.Trim());
+            
+          return customer!;
       }
 
       public async Task SaveChanges()

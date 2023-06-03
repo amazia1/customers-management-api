@@ -7,8 +7,8 @@ namespace Customers_Management.Services.Authentication
 {
     public interface IAuthService
     {
-        Task<ApiResponse<int>> IsCustomerExist(string idCard);
-
+        Task<ApiResponse<string>> IsCustomerExist(string idCard);
+        
         string GenerateToken(string idCard);
     }
 }

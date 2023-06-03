@@ -10,6 +10,8 @@ namespace Customers_Management.Services.Customer
 
         Task<ApiResponse<GetCustomerDto>> GetCustomerById(int id);
 
+        Task<ApiResponse<GetCustomerDto>> GetCustomerByIdCard(string idCard);
+
         Task<ApiResponse<GetCustomerDto>> UpdateCustomer(UpdateCustomerDto updatedCustomer);
     }
 }
